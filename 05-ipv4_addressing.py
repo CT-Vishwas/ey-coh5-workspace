@@ -17,14 +17,16 @@ fields = ip_address.split('.')
 
 flg = 0
 if len(fields) != 4:
+    # print("Invalid IP")
+    flg = 1
+else: 
+    for field in fields:
+        if not field.isdigit() or not (int(field) >= 0 and int(field) <= 255):
+            flg = 1
+            break
+
+if flg == 1:
     print("Invalid IP")
-
-for field in fields:
-    if not field.isdigit() or not (int(field) >= 0 and int(field) <= 255):
-        flg = 1
-        break
-
-if flg == 0:
-    print(f"The IPv4 Address: {ip_address} is valid")
 else:
-    print("Invalid IP")
+    print(f"The IPv4 Address: {ip_address} is valid")
+    
