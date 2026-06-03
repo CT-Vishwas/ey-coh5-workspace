@@ -1,32 +1,31 @@
-ip_address = input("Enter the IPv4 Address to Validate: ")
-fields = ip_address.split('.')
-# if len(fields) != 4:
-#     print("Invalid IP")
+'''
+Module to validate IPv4 Address
+'''
 
-# for field in fields:
-#     if not field.isdigit():
-#         print("Invalid IP")
-#         break
+def is_valid_ip(ip_address: str) -> bool:
+    '''
+    Validates a given IPv4 Address
 
-#     converted_field = int(field)
-#     if not (converted_field >= 0 and converted_field <= 255):
-#         print("Invalid IP")
-#         break
-# else:
-#     print(f"The IPv4 Address: {ip_address} is valid")
+    Returns True if given string is a valid IPv4
+    '''
+    fields = ip_address.split('.')
+    if len(fields) != 4:
+        return False
 
-flg = 0
-if len(fields) != 4:
-    # print("Invalid IP")
-    flg = 1
-else: 
     for field in fields:
-        if not field.isdigit() or not (int(field) >= 0 and int(field) <= 255):
-            flg = 1
-            break
+        if not field.isdigit():
+            return False
 
-if flg == 1:
-    print("Invalid IP")
-else:
-    print(f"The IPv4 Address: {ip_address} is valid")
+        converted_field = int(field)
+        if not (converted_field >= 0 and converted_field <= 255):
+            return False
+    else:
     
+        return True
+
+
+ip_address = input("Enter the IPv4 Address to Validate: ")
+if is_valid_ip(ip_address):
+    print(f"The IPv4 Address: {ip_address} is valid")
+else:
+    print(f"{ip_address} is INVALID!")
