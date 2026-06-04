@@ -55,8 +55,8 @@ def main(file_path):
     # Calculate
     summary = calculate(file_path, summary)
     summary["File Name"] = fname
-    summary["Time Stamp"] = dt.now().isoformat()
-    
+    summary["Time Stamp"] = dt.now().strftime("%Y-%m-%d %I:%M %p")
+
     # Write to a File
     with open(SUMMARY_LOG, "a+") as fh:
         fh.write(f"Summary of {summary["File Name"]} at {summary["Time Stamp"]}\n")
