@@ -1,4 +1,7 @@
 import string
+from pathlib import Path
+import os
+from datetime import datetime as dt
 
 SUMMARY_LOG = "summary.log"
 VOWELS = "aeiouAEIOU"
@@ -35,7 +38,9 @@ def calculate(file_path, summary={}):
     return summary
 
 def main(file_path):
-     
+    # Extract the filename
+    p = Path(file_path)
+    fname = os.path.basename(file_path)
     summary = {
         "File Name": "",
         "Time Stamp": "Date",
@@ -49,7 +54,9 @@ def main(file_path):
 
     # Calculate
     summary = calculate(file_path, summary)
-
+    summary["File Name"] = fname
+    summary["Time Stamp"] = dt.now().isoformat()
+    
     # Write to a File
     with open(SUMMARY_LOG, "a+") as fh:
         fh.write(f"Summary of {summary["File Name"]} at {summary["Time Stamp"]}\n")
